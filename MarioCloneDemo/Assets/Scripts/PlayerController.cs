@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpForce;
 
@@ -27,8 +28,8 @@ public class PlayerController : MonoBehaviour
         }
 
         Move();
-    }
 
+    }
 
     private void Move()
     {
