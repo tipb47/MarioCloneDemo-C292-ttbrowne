@@ -4,12 +4,14 @@ using System.Threading;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
     [SerializeField] TextMeshProUGUI pointText;
     private int currentPoints = 0;
+    private bool gameEnded = false;
 
     void Awake()
     {
@@ -29,6 +31,13 @@ public class UIManager : MonoBehaviour
         pointText.text = "x" + currentPoints;
     }
 
+    public void endGame()
+    {
+        Time.timeScale = 0;
+        pointText.text = "You win with " + currentPoints + " points! Press Enter to Restart.";
+        gameEnded = true;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +47,11 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
-        
+        if (gameEnded && Input.GetKeyDown(KeyCode.Return))
+        {
+            Time.timeScale = 1; //resume
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
     }
 }

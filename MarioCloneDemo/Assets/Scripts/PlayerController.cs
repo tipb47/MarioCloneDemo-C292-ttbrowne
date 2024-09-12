@@ -44,4 +44,14 @@ public class PlayerController : MonoBehaviour
         // (0,1)
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "WinObject")
+        {
+            Destroy(collision.gameObject);
+            UIManager.Instance.endGame();
+        }
+    }
+
 }
